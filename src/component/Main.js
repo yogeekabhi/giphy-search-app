@@ -29,19 +29,33 @@ const Main = () => {
 		}
 	}, [search, shouldCallApi]);
 
-	const handleInputChange = useCallback((e) => {
-		setSearch(e.target.value);
-		setErrorMessage("");
-		!!debounceRef.current && clearTimeout(debounceRef.current);
-		debounceRef.current = setTimeout(() => {
-			setShouldCallApi(true);
-		}, 600);
-	}, []);
+	const handleInputChange = useCallback(
+		(e) => {
+			setSearch(e.target.value);
+			setErrorMessage("");
+			!!debounceRef.current && clearTimeout(debounceRef.current);
+			debounceRef.current = setTimeout(() => {
+				setShouldCallApi(true);
+			}, 600);
+		},
+		[search]
+	);
+
+	const handleSubmit = useCallback(
+		(e) => {
+			e.preventDefault();
+		},
+		[search]
+	);
 
 	return (
 		<div>
 			<h1>Search GIFs</h1>
-			<SearchBarComp search={search} handleInputChange={handleInputChange} />
+			<SearchBarComp
+				search={search}
+				handleInputChange={handleInputChange}
+				handleSubmit={handleSubmit}
+			/>
 			{!!errorMessage.length && !!search.length && (
 				<div className='error-msg'>{errorMessage}</div>
 			)}

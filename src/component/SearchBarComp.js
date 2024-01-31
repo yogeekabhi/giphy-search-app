@@ -1,9 +1,6 @@
 import React from "react";
 
-const SearchBarComp = ({ search, handleInputChange }) => {
-	const handleSubmit = (e) => {
-		e.preventDefault();
-	};
+const SearchBarComp = ({ search, handleInputChange, handleSubmit }) => {
 	return (
 		<div className='form-container'>
 			<form id='search-form' onSubmit={handleSubmit}>
@@ -20,4 +17,4 @@ const SearchBarComp = ({ search, handleInputChange }) => {
 	);
 };
 
-export default SearchBarComp;
+export default React.memo(SearchBarComp);
