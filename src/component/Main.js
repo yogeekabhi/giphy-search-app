@@ -29,24 +29,18 @@ const Main = () => {
 		}
 	}, [search, shouldCallApi]);
 
-	const handleInputChange = useCallback(
-		(e) => {
-			setSearch(e.target.value);
-			setErrorMessage("");
-			!!debounceRef.current && clearTimeout(debounceRef.current);
-			debounceRef.current = setTimeout(() => {
-				setShouldCallApi(true);
-			}, 600);
-		},
-		[search]
-	);
+	const handleInputChange = useCallback((e) => {
+		setSearch(e.target.value);
+		setErrorMessage("");
+		!!debounceRef.current && clearTimeout(debounceRef.current);
+		debounceRef.current = setTimeout(() => {
+			setShouldCallApi(true);
+		}, 600);
+	}, []);
 
-	const handleSubmit = useCallback(
-		(e) => {
-			e.preventDefault();
-		},
-		[search]
-	);
+	const handleSubmit = useCallback((e) => {
+		e.preventDefault();
+	}, []);
 
 	return (
 		<div>
