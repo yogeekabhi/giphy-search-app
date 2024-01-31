@@ -1,7 +1,6 @@
 import React from "react";
 
 const GifListItem = ({ gif }) => {
-	console.log({ gif });
 	return (
 		<div className='grid-item'>
 			<figure>

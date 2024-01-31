@@ -4,17 +4,17 @@ import SearchBarComp from "./SearchBarComp";
 import { fetchGifs } from "../utils/httpsRequest";
 
 const Main = () => {
-	const [search, setSearch] = useState(() => "");
-	const [gifData, setGifData] = useState(() => "");
-	const [errorMessage, setErrorMessage] = useState(() => "");
-	const [shouldCallApi, setShouldCallApi] = useState(() => true);
+	const [search, setSearch] = useState(() => ""); // search state
+	const [gifData, setGifData] = useState(() => ""); // gifs data state
+	const [errorMessage, setErrorMessage] = useState(() => ""); // error state
+	const [shouldCallApi, setShouldCallApi] = useState(() => true); // flag to handle debounce effect
 	const debounceRef = useRef(null);
 
 	useEffect(() => {
 		if (shouldCallApi) {
 			setShouldCallApi(false);
+			/****** Fetch gif api call ******/
 			fetchGifs(search).then((resp) => {
-				console.log({ resp });
 				if (resp.status === 200) {
 					if (resp.data.length > 0) {
 						setGifData([...resp.data]);
@@ -30,7 +30,6 @@ const Main = () => {
 	}, [search, shouldCallApi]);
 
 	const handleInputChange = useCallback((e) => {
-		console.log(e.target.value, "searching...");
 		setSearch(e.target.value);
 		setErrorMessage("");
 		!!debounceRef.current && clearTimeout(debounceRef.current);
@@ -48,7 +47,6 @@ const Main = () => {
 			)}
 			<div className='grid-container'>
 				{(gifData || []).map((item) => {
-					console.log(item, "!!!");
 					return <GifListItem gif={item} key={item.id} />;
 				})}
 			</div>
