@@ -10,5 +10,3 @@
 2. Now you can run the following command and see the app in action
 ### npm start
 
-Hope it was fun!
-
